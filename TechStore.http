@@ -1,0 +1,6 @@
+@TechStore_HostAddress = http://localhost:5049
+
+GET {{TechStore_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
