@@ -17,9 +17,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
 
+// Basic welcome page with navigation to Swagger page
 app.MapGet("/", () => Results.Content(@"
     <html>
         <head>
