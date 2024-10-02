@@ -20,6 +20,15 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapGet("/", () => Results.Content(@"
+    <html>
+        <head>
+            <title>TechStore API</title>
+        </head>
+        <body style='font-family: Arial, sans-serif; background-color: #f4f4f4; text-align: center; height: 90%; display: flex; flex-direction: column; justify-content: center; align-items: center;'>
+            <h1 style='color: #333; font-size: 36px;'>Welcome to TechStore API</h1>
+            <a href='/swagger' style='color: #007bff; text-decoration: none;'> Click here to Swagger documentation</a>
+        </body>
+    </html>", "text/html"));
 
 app.Run();
