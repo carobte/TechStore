@@ -5,7 +5,7 @@ using TechStore.Data;
 var builder = WebApplication.CreateBuilder(args);
 Env.Load();
 
-// Database connection
+// Database conection
 
 var host = Environment.GetEnvironmentVariable("DB_HOST");
 var databaseName = Environment.GetEnvironmentVariable("DB_DATABASE");
