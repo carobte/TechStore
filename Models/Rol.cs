@@ -17,6 +17,7 @@ namespace TechStore.Models
 
         [Column("name")]
         [StringLength(100)]
+        [Required]
         public required string Name {get; set;}
         public required ICollection<User> Users { get; set; }
 

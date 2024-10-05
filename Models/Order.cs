@@ -17,13 +17,16 @@ namespace TechStore.Models
         public int Id { get; set; }
 
         [Column("createdAt")]
+        [Required]
         public required DateTime CreatedAt { get; set; }  
 
         [Column("status")]
+        [Required]
         public required  string Status {get;set;}    
 
 
         [ForeignKey("user_id")]
+        [Column("user_id")]
         public required int UserId { get; set; }
         public User User { get; set; }
 
