@@ -25,6 +25,6 @@ namespace TechStore.Models
         [Required(ErrorMessage = "Product description is required.")]      
         public required string Description { get; set; }
         
-        public required ICollection<Product> Products { get; set; }
+        public ICollection<Product> Products { get; set; }
     }
 }

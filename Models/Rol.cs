@@ -19,7 +19,7 @@ namespace TechStore.Models
         [StringLength(100)]
         [Required]
         public required string Name {get; set;}
-        public required ICollection<User> Users { get; set; }
+        public ICollection<User> Users { get; set; }
 
     }
 }

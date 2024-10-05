@@ -47,7 +47,7 @@ namespace TechStore.Models
         [Column("rol_id")]
         public required int RolId { get; set; }
         public Rol Rol { get; set; }
-        public required ICollection<Order> Orders { get; set; }
+        public ICollection<Order> Orders { get; set; }
 
     }
 }
