@@ -12,9 +12,9 @@ namespace TechStore.Controllers.v1.UserControllers
     [ApiController]
     [Route("api/v1/users")]
     [Tags("users")]
-    public class DeleteUsersController : UsersController
+    public class UsersDeleteController : UsersController
     {
-        public DeleteUsersController(IUserRepository userRepository, Utilities utilities) : base(userRepository, utilities)
+        public UsersDeleteController(IUserRepository userRepository, Utilities utilities) : base(userRepository, utilities)
         {
         }
 
