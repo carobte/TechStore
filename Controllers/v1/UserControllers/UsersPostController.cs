@@ -20,9 +20,15 @@ namespace TechStore.Controllers.v1.UserControllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(User newUser){                      
+        public async Task<IActionResult> Post(RegisterDTO newUser)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             await _userRepository.Create(newUser);
-            return CreatedAtAction(nameof(Post), new { id = newUser.Id }, newUser);
+            return Created();
         }
 
     }

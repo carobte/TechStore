@@ -22,10 +22,20 @@ namespace TechStore.Services
             _context = context;
             _utilities = utilities;
         }
-        public async Task Create(User user)
+        public async Task Create(RegisterDTO user)
         {
             user.Password = _utilities.EncryptSHA256(user.Password);
-            _context.Users.Add(user);
+            
+            var newUser = new User{
+                Name = user.Name.ToLower(),
+                Address = user.Address.ToLower(),
+                Telephone = user.Telephone,
+                Email = user.Email.ToLower(),
+                Password = user.Password,
+                RolId = 3 // default value (client)
+            };
+
+            _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
         }
 

@@ -11,7 +11,7 @@ namespace TechStore.Repositories
     {
         Task<IEnumerable<User>> Get();
         Task<User> GetById(int id);
-        Task Create(User user);
+        Task Create(RegisterDTO user);
         Task Delete(int id);
         Task Update(int id, User newInfo);
     }
