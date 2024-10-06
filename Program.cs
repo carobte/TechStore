@@ -6,6 +6,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using TechStore.Config;
 using TechStore.Data;
+using TechStore.Repositories;
+using TechStore.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 Env.Load();
@@ -49,7 +51,7 @@ builder.Services.AddAuthentication(config =>
     };
 });
 
-
+builder.Services.AddScoped<IUserRepository, UserService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -99,7 +101,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 // Basic welcome page with navigation to Swagger page
-app.MapGet("/", () => Results.Content(@"
+ app.MapGet("/", () => Results.Content(@"
     <html>
         <head>
             <title>TechStore API</title>
@@ -108,7 +110,10 @@ app.MapGet("/", () => Results.Content(@"
             <h1 style='color: #333; font-size: 36px;'>Welcome to TechStore API</h1>
             <a href='/swagger' style='color: #007bff; text-decoration: none;'> Click here to Swagger documentation</a>
         </body>
-    </html>", "text/html"));
+    </html>", "text/html")); 
+
+
+app.MapControllers();
 
 // Runs the program
 app.Run();
