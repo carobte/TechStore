@@ -15,5 +15,6 @@ namespace TechStore.Repositories
         Task Create(RegisterDTO user);
         Task Delete(int id);
         Task Update(int id, User newInfo);
+        Task<string> Login(LoginDTO loginInfo);
     }
 }

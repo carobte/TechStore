@@ -107,5 +107,28 @@ namespace TechStore.Services
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<string> Login(LoginDTO loginInfo)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(user => user.Email == loginInfo.Email);
+
+            if (user != null)
+            {
+                if (user.Password == _utilities.EncryptSHA256(loginInfo.Password))
+                {
+                    if (user.RolId == 1) // admin rol
+                    {
+                        var token = _utilities.GenerateJwtToken(user);
+                        return token;
+                    }
+
+                    return "client";
+                }
+
+                return null;
+            }
+
+            return null;
+        }
     }
 }
