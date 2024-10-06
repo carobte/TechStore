@@ -22,24 +22,26 @@ namespace TechStore.Controllers.v1.UserControllers
         public async Task<IActionResult> Get()
         {
             var users = await _userRepository.Get();
-            
+
             if (users == null || !users.Any())
             {
                 return NoContent();
             }
-            
-/*             foreach (var user in users)
-            {
-                new UserDTO {
-                    Name = user.Name,
-                    Address = user.Address,
-                    Telephone = user.Telephone,
-                    Email = user.Email,
-                    RolName = user.Rol.Name
-                };
-            } */
 
             return Ok(users);
-        }   
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var user = await _userRepository.GetById(id);
+           
+            if (user == null)
+            {
+                return NotFound();
+            }
+           
+            return Ok(user);
+        }
     }
 }

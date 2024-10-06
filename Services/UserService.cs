@@ -25,8 +25,9 @@ namespace TechStore.Services
         public async Task Create(RegisterDTO user)
         {
             user.Password = _utilities.EncryptSHA256(user.Password);
-            
-            var newUser = new User{
+
+            var newUser = new User
+            {
                 Name = user.Name.ToLower(),
                 Address = user.Address.ToLower(),
                 Telephone = user.Telephone,
@@ -39,15 +40,48 @@ namespace TechStore.Services
             await _context.SaveChangesAsync();
         }
 
-
-        public async Task<User> GetById(int id)
+        public async Task<IEnumerable<UserDTO>> Get()
         {
-            return await _context.Users.FindAsync(id);
+            var users = await _context.Users
+            .Include(user => user.Rol)
+            .Select(user => new UserDTO
+            {
+                Name = user.Name,
+                Address = user.Address,
+                Telephone = user.Telephone,
+                Email = user.Email,
+                Rol = user.Rol.Name
+            }).ToListAsync();
+
+            return users;
+        }
+
+        public async Task<UserDTO> GetById(int id)
+        {
+            var user = await _context.Users
+            .Include(user => user.Rol)
+            .FirstOrDefaultAsync(user => user.Id == id);
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            var userDto = new UserDTO
+            {
+                Name = user.Name,
+                Address = user.Address,
+                Telephone = user.Telephone,
+                Email = user.Email,
+                Rol = user.Rol.Name
+            };
+
+            return userDto;
         }
 
         public async Task Delete(int id)
         {
-            var user = await GetById(id);
+            var user = await _context.Users.FindAsync(id);
             if (user != null)
             {
                 _context.Users.Remove(user);
@@ -55,22 +89,18 @@ namespace TechStore.Services
             }
         }
 
-        public async Task<IEnumerable<User>> Get()
-        {
-            return await _context.Users.ToListAsync();
-        }
 
         public async Task Update(int id, User newInfo)
         {
-            var user = await GetById(id);
+            var user = await _context.Users.FindAsync(id);
             if (user != null)
-            {             
+            {
                 user.Id = id;
-                user.Name = newInfo.Name;
-                user.Address = newInfo.Address;
+                user.Name = newInfo.Name.ToLower();
+                user.Address = newInfo.Address.ToLower();
                 user.Telephone = newInfo.Telephone;
-                user.Email = newInfo.Email;
-                user.Password = _utilities.EncryptSHA256( newInfo.Password);
+                user.Email = newInfo.Email.ToLower();
+                user.Password = _utilities.EncryptSHA256(newInfo.Password);
                 user.RolId = newInfo.Id;
 
                 _context.Entry(user).State = EntityState.Modified;
