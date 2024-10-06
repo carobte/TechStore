@@ -90,7 +90,7 @@ namespace TechStore.Services
         }
 
 
-        public async Task Update(int id, User newInfo)
+        public async Task Update(int id, UserDTO newInfo)
         {
             var user = await _context.Users.FindAsync(id);
             if (user != null)
@@ -100,8 +100,7 @@ namespace TechStore.Services
                 user.Address = newInfo.Address.ToLower();
                 user.Telephone = newInfo.Telephone;
                 user.Email = newInfo.Email.ToLower();
-                user.Password = _utilities.EncryptSHA256(newInfo.Password);
-                user.RolId = newInfo.Id;
+                user.Rol = user.Rol;
 
                 _context.Entry(user).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
