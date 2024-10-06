@@ -60,7 +60,21 @@ builder.Services.AddEndpointsApiExplorer();
 // Swagger config to block certain endpoints
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "TechStore API", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "TechStore API",
+        Version = "v1",
+        Description = "API for managing a Tech store database. This version includes basic CRUD operations for users, products and categories.",
+        Contact = new OpenApiContact
+        {
+            Name = "Carolina Bustamante Escobar",
+            Email = "caro.bustamante.escobar@gmail.com",
+            Url = new Uri("https://www.linkedin.com/in/caro-bustamante-escobar")
+        }
+    }
+         );
+
+    c.EnableAnnotations();
 
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
