@@ -14,7 +14,7 @@ namespace TechStore.Services
     public class CategoryService : ICategoryRepository
     {
         protected readonly AppDbContext _context;
-       
+
         public CategoryService(AppDbContext context)
         {
             _context = context;
@@ -34,7 +34,7 @@ namespace TechStore.Services
 
         public async Task Delete(int id)
         {
-           var category = await _context.Categories.FindAsync(id);
+            var category = await _context.Categories.FindAsync(id);
             if (category != null)
             {
                 _context.Categories.Remove(category);
@@ -58,7 +58,12 @@ namespace TechStore.Services
         {
             var category = await _context.Categories
             .FindAsync(id);
-            
+
+            if (category == null)
+            {
+                return null;
+            }
+
             var categoryDto = new CategoryDTO
             {
                 Name = category.Name,
@@ -70,7 +75,7 @@ namespace TechStore.Services
 
         public async Task Update(int id, CategoryDTO newInfo)
         {
-             var category = await _context.Categories.FindAsync(id);
+            var category = await _context.Categories.FindAsync(id);
             if (category != null)
             {
                 category.Name = newInfo.Name.ToLower();

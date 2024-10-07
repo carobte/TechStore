@@ -51,7 +51,9 @@ builder.Services.AddAuthentication(config =>
     };
 });
 
+// Repositories and services
 builder.Services.AddScoped<IUserRepository, UserService>();
+builder.Services.AddScoped<ICategoryRepository, CategoryService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
