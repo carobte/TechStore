@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using TechStore.Config;
@@ -15,6 +16,7 @@ namespace TechStore.Controllers.v1.UserControllers
     [ApiController]
     [Route("api/v1/users")]
     [Tags("users")]
+    [Authorize]
     public class UsersPutController : UsersController
     {
         public UsersPutController(IUserRepository userRepository, Utilities utilities) : base(userRepository, utilities)

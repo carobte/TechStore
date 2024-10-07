@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using TechStore.DTOs.Product;
@@ -12,6 +13,7 @@ namespace TechStore.Controllers.v1.ProductsControllers
     [ApiController]
     [Route("api/v1/products")]
     [Tags("products")]
+    [Authorize]
     public class ProductsPutController : ProductsControllers
     {
         public ProductsPutController(IProductRepository productRepository) : base(productRepository)

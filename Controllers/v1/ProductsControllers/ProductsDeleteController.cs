@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using TechStore.Repositories;
@@ -11,6 +12,7 @@ namespace TechStore.Controllers.v1.ProductsControllers
     [ApiController]
     [Route("api/v1/products")]
     [Tags("products")]
+    [Authorize]
     public class ProductsDeleteController : ProductsControllers
     {
         public ProductsDeleteController(IProductRepository productRepository) : base(productRepository)

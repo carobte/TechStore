@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using TechStore.Repositories;
@@ -11,6 +12,7 @@ namespace TechStore.Controllers.v1.CategoriesControllers
     [ApiController]
     [Route("api/v1/categories")]
     [Tags("categories")]
+    [Authorize]
     public class CategoriesDeleteController : CategoriesController
     {
         public CategoriesDeleteController(ICategoryRepository categoryRepository) : base(categoryRepository)
