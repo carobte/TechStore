@@ -20,8 +20,7 @@ namespace TechStore.Controllers.v1.CategoriesControllers
         [HttpGet]
         [SwaggerOperation(
           Summary = "Get categories",
-          Description = "Returns all the categories in database"
-      )]
+          Description = "Returns all the categories in database")]
         [SwaggerResponse(200, "Ok: Returns all the categories in database")]
         [SwaggerResponse(204, "No Content: There are not categories in the database")]
 

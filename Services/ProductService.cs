@@ -67,6 +67,7 @@ namespace TechStore.Services
             var product = await _context.Products.FindAsync(id);
             if (product != null)
             {
+                product.Id = product.Id;
                 product.Name = newInfo.Name;
                 product.Description = newInfo.Description;
                 product.Price = newInfo.Price;
